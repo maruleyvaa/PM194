@@ -2,14 +2,24 @@
 
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button } from 'react-native';
+import React,{useState} from 'react';
 
-const Texto=(props) => {
-  const {contenido}=props
+const Texto=() => {
+  const [contenido,setContenido]=useState("Hola Mundo, React Native");
+  const actualizaTexto=()=>{setContenido("Texto actualizado");}
   return (
-    <Text>{contenido}</Text>
+    <Text onPress={actualizaTexto}>{contenido}</Text>
   );
 }
 
+//cambiar contenido del boton al pulsar
+const Boton=() => {
+  const [textoBoton,setTextoBoton]=useState("Tlabaja");
+  const actualizaBoton=()=>{setTextoBoton("Ya no");}
+  return (
+  <Button title={textoBoton} onPress={actualizaBoton}></Button>
+  );
+}
 
 // Zona 2, MAIN (ejecucuión del programa)
 export default function App() {
@@ -17,12 +27,12 @@ export default function App() {
     <View style={styles.container}>
 
 
-      <Texto contenido="Hola"></Texto>
-      <Texto contenido="mundo"></Texto>
-      <Texto contenido="React"></Texto>
-      <Texto contenido="Native"></Texto>
+      <Texto></Texto>
+      <Texto></Texto>
+      <Texto></Texto>
+      <Texto></Texto>
       <Text>Hola Mundo, React Native</Text>
-      <Button title="Tlabaja"></Button>
+      <Boton></Boton>
        
       <StatusBar style="auto" />
     </View>
