@@ -1,52 +1,59 @@
 //Zona 1, IMPORTACIONES
 
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button, Switch } from 'react-native';
-import React, {use, useEffect,useState} from 'react';
-import { TextInput, Alert, ScrollView } from 'react-native-web';
+import { StyleSheet, Text, View, ImageBackground } from 'react-native';
+import React, { useEffect, useState } from 'react';
 import * as SplashScreen from 'expo-splash-screen';
 
+// Evita que la pantalla de carga se oculte automáticamente
+SplashScreen.preventAutoHideAsync();
 
-
-SplashScreen.preventAutoHideAsync(); // Evita que la pantalla de carga se oculte automáticamente
-// Zona 2, MAIN (ejecucuión del programa)
+// Zona 2, MAIN (ejecución del programa)
 export default function App() {
-  const[spash,setSplash] = useState(false);
+  const [appReady, setAppReady] = useState(false);
 
   useEffect(() => {
-    setTimeout(async() => {
+    setTimeout(async () => {
       setAppReady(true);
       await SplashScreen.hideAsync(); // Oculta la pantalla de carga después de 2 segundos
-    },2000);
-   }, []);
+    }, 2000);
+  }, []);
   
-      
+  return (
+    <ImageBackground 
+      source={require('./assets/messi.jpg')}
+      style={styles.background}
+      resizeMode="cover">
+        <View style={styles.container}>
+          <Text style={styles.title}>Bienvenido a mi app</Text>
+          <Text style={styles.subtitle}>
+            {appReady ? 'La app está lista' : 'Cargando...'}
+          </Text>
+        </View>
+    </ImageBackground>
+  );
 }
-
 
 // Zona 3, ESTILOS
 const styles = StyleSheet.create({
+  background: {
+    flex: 1,
+    width: "100%",
+    height: "100%",
+  },
   container: {
-    flexGrow: 1,
-    backgroundColor: 'lightpink',
+    flex: 1,
     padding: 20,
-    alignItems: 'stretch',
+    alignItems: 'center',
     justifyContent: 'center',
   },
-  label: {
+  title: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#fff'
+  },
+  subtitle: {
     fontSize: 16,
-    marginTop: 10,
-    color: '#333',
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: '#999',
-    borderRadius: 5,
-    padding: 10,
-    backgroundColor: '#fff',
-    marginBottom: 10,
-  },
-  textArea: {
-    height: 100,
-  },
+    color: '#fff'
+  }
 });
